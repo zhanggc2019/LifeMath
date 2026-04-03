@@ -1,0 +1,16 @@
+{
+  "lazyCodeLoading": "requiredComponents",
+  "pages": [
+    "pages/index/index",
+    "pages/tax/index",
+    "pages/loan/index",
+    "pages/health/index",
+    "pages/converter/index"
+  ],
+  "window": {
+    "navigationBarTitleText": "计算器大全",
+    "navigationBarBackgroundColor": "#ff6b6b",
+    "navigationBarTextStyle": "white"
+  },
+  "sitemapLocation": "sitemap.json"
+}

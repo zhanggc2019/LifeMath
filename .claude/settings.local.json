@@ -1,0 +1,17 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(npm init:*)",
+      "Read(//d/Projects/**)",
+      "Bash(rm -rf wechat_demo)",
+      "Bash(npm install:*)",
+      "Bash(npm run:*)",
+      "Bash(rm:*)",
+      "Bash(rm -rf node_modules)",
+      "Bash(npm cache:*)",
+      "WebFetch(domain:minimax-algeng-chat-tts.oss-cn-wulanchabu.aliyuncs.com)",
+      "Bash(cp -r D:/Projects/wechat_demo/utils D:/Projects/wechat_demo/cloudfunctions/tax/)",
+      "Bash(cp -r D:/Projects/wechat_demo/utils D:/Projects/wechat_demo/cloudfunctions/loan/)"
+    ]
+  }
+}

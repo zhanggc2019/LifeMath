@@ -1,0 +1,246 @@
+<view class="container">
+  <!-- 输入区域 -->
+  <view class="card">
+    <text class="section-title">基本信息</text>
+    <view class="input-row">
+      <text class="input-label">月税前工资（元）</text>
+      <input
+        class="input-field"
+        type="digit"
+        placeholder="请输入"
+        value="{{income}}"
+        bindinput="onIncomeInput"
+      />
+    </view>
+
+    <view class="input-row">
+      <text class="input-label">选择城市</text>
+      <picker mode="selector" range="{{cityList}}" value="{{cityIndex}}" bindchange="onCityChange">
+        <view class="picker-field">
+          <text>{{cityList[cityIndex]}}</text>
+          <text class="arrow">▼</text>
+        </view>
+      </picker>
+    </view>
+  </view>
+
+  <!-- 社保/公积金紧凑设置 -->
+  <view class="card matrix-card">
+    <text class="section-title matrix-title">社保/公积金设置（个人）</text>
+
+    <view class="matrix-grid">
+      <view class="matrix-item">
+        <text class="matrix-label">社保基数</text>
+        <input
+          class="matrix-input"
+          type="digit"
+          placeholder="默认工资"
+          value="{{socialBase}}"
+          bindinput="onSocialBaseInput"
+        />
+      </view>
+
+      <view class="matrix-item">
+        <text class="matrix-label">公积金基数</text>
+        <input
+          class="matrix-input"
+          type="digit"
+          placeholder="默认工资"
+          value="{{housingBase}}"
+          bindinput="onHousingBaseInput"
+        />
+      </view>
+
+      <view class="matrix-item">
+        <text class="matrix-label">养老保险</text>
+        <view class="matrix-input-wrap">
+          <input class="matrix-input small" type="digit" value="{{socialRates.pension}}" bindinput="onSocialRateInput" data-key="pension" />
+          <text class="matrix-unit">%</text>
+        </view>
+      </view>
+
+      <view class="matrix-item">
+        <text class="matrix-label">公积金比例</text>
+        <view class="matrix-input-wrap">
+          <input class="matrix-input small" type="digit" value="{{housingRate}}" bindinput="onHousingRateInput" />
+          <text class="matrix-unit">%</text>
+        </view>
+      </view>
+
+      <view class="matrix-item">
+        <text class="matrix-label">医疗保险</text>
+        <view class="matrix-input-wrap">
+          <input class="matrix-input small" type="digit" value="{{socialRates.medical}}" bindinput="onSocialRateInput" data-key="medical" />
+          <text class="matrix-unit">%</text>
+        </view>
+      </view>
+
+      <view class="matrix-item">
+        <text class="matrix-label">失业保险</text>
+        <view class="matrix-input-wrap">
+          <input class="matrix-input small" type="digit" value="{{socialRates.unemployment}}" bindinput="onSocialRateInput" data-key="unemployment" />
+          <text class="matrix-unit">%</text>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 专项附加扣除 -->
+  <view class="card deduction-card">
+    <text class="section-title deduction-title">专项附加扣除（月）</text>
+
+    <view class="deduction-chip-grid">
+      <view class="deduction-chip {{deductions.childrenEducation ? 'active' : ''}}" bindtap="toggleDeduction" data-key="childrenEducation">
+        <view class="deduction-chip-main">
+          <text class="deduction-chip-name">子女教育</text>
+          <text class="deduction-chip-desc">2000/月</text>
+        </view>
+        <view class="chip-check">{{deductions.childrenEducation ? '✓' : ''}}</view>
+      </view>
+
+      <view class="deduction-chip {{deductions.continuingEducation ? 'active' : ''}}" bindtap="toggleDeduction" data-key="continuingEducation">
+        <view class="deduction-chip-main">
+          <text class="deduction-chip-name">继续教育</text>
+          <text class="deduction-chip-desc">400/月</text>
+        </view>
+        <view class="chip-check">{{deductions.continuingEducation ? '✓' : ''}}</view>
+      </view>
+
+      <view class="deduction-chip {{deductions.housingLoan ? 'active' : ''}}" bindtap="toggleDeduction" data-key="housingLoan">
+        <view class="deduction-chip-main">
+          <text class="deduction-chip-name">住房贷款</text>
+          <text class="deduction-chip-desc">1000/月</text>
+        </view>
+        <view class="chip-check">{{deductions.housingLoan ? '✓' : ''}}</view>
+      </view>
+
+      <view class="deduction-chip {{deductions.elderlySupport ? 'active' : ''}}" bindtap="toggleDeduction" data-key="elderlySupport">
+        <view class="deduction-chip-main">
+          <text class="deduction-chip-name">赡养老人</text>
+          <text class="deduction-chip-desc">2000/月</text>
+        </view>
+        <view class="chip-check">{{deductions.elderlySupport ? '✓' : ''}}</view>
+      </view>
+    </view>
+
+    <view class="deduction-inline-grid">
+      <view class="inline-item">
+        <text class="inline-label">住房租金</text>
+        <picker mode="selector" range="{{rentLevels}}" bindchange="onRentChange">
+          <view class="inline-field">
+            <text>{{deductions.housingRent || '无'}}</text>
+            <text class="arrow">▼</text>
+          </view>
+        </picker>
+      </view>
+
+      <view class="inline-item">
+        <text class="inline-label">大病医疗（年）</text>
+        <input
+          class="inline-input"
+          type="digit"
+          placeholder="年费用"
+          value="{{deductions.bigDiseaseMedical || ''}}"
+          bindinput="onBigDiseaseInput"
+        />
+      </view>
+    </view>
+  </view>
+
+  <!-- 计算按钮 -->
+  <view class="btn-calculate" bindtap="calculate">
+    <text class="btn-text">开始计算</text>
+  </view>
+
+  <!-- 结果区域 -->
+  <view wx:if="{{result}}" class="card result-card">
+    <text class="section-title">年度汇总</text>
+
+    <view class="result-summary">
+      <view class="summary-item">
+        <text class="summary-label">年税前</text>
+        <text class="summary-value">¥{{result.annualIncome}}</text>
+      </view>
+      <view class="summary-item">
+        <text class="summary-label">年个税</text>
+        <text class="summary-value tax">¥{{result.personalTax}}</text>
+      </view>
+      <view class="summary-item">
+        <text class="summary-label">年税后</text>
+        <text class="summary-value success">¥{{result.afterTaxIncome}}</text>
+      </view>
+    </view>
+
+    <view class="divider"></view>
+
+    <view class="result-row">
+      <text class="result-label">月税前工资</text>
+      <text class="result-value">¥{{result.taxBefore}}</text>
+    </view>
+    <view class="result-row">
+      <text class="result-label">月社保</text>
+      <text class="result-value">-¥{{result.socialInsuranceTotal}}</text>
+    </view>
+    <view class="result-row">
+      <text class="result-label">月公积金</text>
+      <text class="result-value">-¥{{result.housingFundTotal}}</text>
+    </view>
+    <view class="result-row">
+      <text class="result-label">月专项扣除</text>
+      <text class="result-value">-¥{{result.specialDeductionsTotal}}</text>
+    </view>
+    <view class="result-row highlight">
+      <text class="result-label">月应税所得</text>
+      <text class="result-value">¥{{result.taxableIncome}}</text>
+    </view>
+
+    <!-- 累计预扣明细 -->
+    <view class="divider"></view>
+    <view class="detail-header">
+      <text class="section-title detail-title">累计预扣明细</text>
+      <view class="toggle-detail-btn" bindtap="toggleMonthlyDetails">
+        <text class="toggle-detail-text">{{showMonthlyDetails ? '收起每月明细' : '查看每月明细'}}</text>
+      </view>
+    </view>
+
+    <view wx:if="{{showMonthlyDetails}}" class="detail-table">
+      <view class="table-header">
+        <text class="col1">月份</text>
+        <text class="col2">累计收入</text>
+        <text class="col2">累计扣除</text>
+        <text class="col2">个税</text>
+        <text class="col2">实发</text>
+      </view>
+      <view wx:for="{{result.monthlyDetails}}" wx:key="month" class="table-row">
+        <text class="col1">{{item.month}}月</text>
+        <text class="col2">{{item.cumulativeIncome}}</text>
+        <text class="col2">{{item.cumulativeDeduction}}</text>
+        <text class="col2 tax">{{item.tax}}</text>
+        <text class="col2 success">{{item.afterTax}}</text>
+      </view>
+    </view>
+    <view wx:else class="detail-collapsed-tip">
+      <text>点击“查看每月明细”展开 1-12 月累计预扣数据</text>
+    </view>
+  </view>
+
+  <!-- 自定义底部导航 -->
+  <view class="custom-tabbar">
+    <view class="tabbar-item" bindtap="goToIndex">
+      <view class="tabbar-icon">🏠</view>
+      <text class="tabbar-text">首页</text>
+    </view>
+    <view class="tabbar-item active">
+      <view class="tabbar-icon">💰</view>
+      <text class="tabbar-text">个税</text>
+    </view>
+    <view class="tabbar-item" bindtap="goToLoan">
+      <view class="tabbar-icon">🏦</view>
+      <text class="tabbar-text">贷款</text>
+    </view>
+    <view class="tabbar-item" bindtap="goToHealth">
+      <view class="tabbar-icon">❤️</view>
+      <text class="tabbar-text">健康</text>
+    </view>
+  </view>
+</view>

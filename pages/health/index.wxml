@@ -1,0 +1,215 @@
+<view class="container">
+  <!-- Tab切换 -->
+  <view class="tab-header">
+    <view
+      wx:for="{{tabs}}"
+      wx:key="*this"
+      class="tab-item {{activeTab === index ? 'active' : ''}}"
+      bindtap="switchTab"
+      data-index="{{index}}"
+    >
+      <text>{{item}}</text>
+    </view>
+  </view>
+
+  <!-- BMI计算 -->
+  <view wx:if="{{activeTab === 0}}" class="tab-content">
+    <view class="card">
+      <text class="section-title">身体质量指数 (BMI)</text>
+
+      <view class="input-row">
+        <text class="input-label">身高 (cm)</text>
+        <input
+          class="input-field"
+          type="digit"
+          placeholder="如：170"
+          value="{{height}}"
+          bindinput="onHeightInput"
+        />
+      </view>
+      <view class="input-row">
+        <text class="input-label">体重 (kg)</text>
+        <input
+          class="input-field"
+          type="digit"
+          placeholder="如：65"
+          value="{{weight}}"
+          bindinput="onWeightInput"
+        />
+      </view>
+    </view>
+
+    <view class="btn-calculate" bindtap="calcBMI">
+      <text class="btn-text">计算BMI</text>
+    </view>
+
+    <view wx:if="{{bmiResult}}" class="card result-card">
+      <view class="bmi-display">
+        <view class="bmi-circle" style="border-color: {{bmiResult.color}}">
+          <text class="bmi-value" style="color: {{bmiResult.color}}">{{bmiResult.bmi}}</text>
+          <text class="bmi-label">BMI</text>
+        </view>
+        <view class="bmi-info">
+          <text class="bmi-category" style="color: {{bmiResult.color}}">{{bmiResult.category}}</text>
+          <text class="bmi-desc">{{bmiResult.description}}</text>
+        </view>
+      </view>
+
+      <view class="divider"></view>
+
+      <view class="result-row">
+        <text class="result-label">您的体重</text>
+        <text class="result-value">{{bmiResult.weight}} kg</text>
+      </view>
+      <view class="result-row">
+        <text class="result-label">标准体重范围</text>
+        <text class="result-value">{{bmiResult.minWeight}} - {{bmiResult.maxWeight}} kg</text>
+      </view>
+    </view>
+
+    <view class="card">
+      <text class="section-title">BMI分类标准</text>
+      <view class="bmi-table">
+        <view class="bmi-table-header">
+          <text class="col1">分类</text>
+          <text class="col2">BMI范围</text>
+        </view>
+        <view class="bmi-table-row">
+          <text class="col1" style="color: #ffb347">偏瘦</text>
+          <text class="col2">18.5 以下</text>
+        </view>
+        <view class="bmi-table-row">
+          <text class="col1" style="color: #07c160">正常</text>
+          <text class="col2">18.5 - 23.9</text>
+        </view>
+        <view class="bmi-table-row">
+          <text class="col1" style="color: #ff9f43">超重</text>
+          <text class="col2">24 - 27.9</text>
+        </view>
+        <view class="bmi-table-row">
+          <text class="col1" style="color: #ff6b6b">肥胖</text>
+          <text class="col2">28 及以上</text>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 卡路里计算 -->
+  <view wx:if="{{activeTab === 1}}" class="tab-content">
+    <view class="card">
+      <text class="section-title">基础代谢与卡路里</text>
+
+      <view class="input-row">
+        <text class="input-label">身高 (cm)</text>
+        <input class="input-field" type="digit" placeholder="如：170" value="{{height}}" bindinput="onHeightInput" />
+      </view>
+      <view class="input-row">
+        <text class="input-label">体重 (kg)</text>
+        <input class="input-field" type="digit" placeholder="如：65" value="{{weight}}" bindinput="onWeightInput" />
+      </view>
+      <view class="input-row">
+        <text class="input-label">年龄</text>
+        <input class="input-field" type="digit" placeholder="如：30" value="{{age}}" bindinput="onAgeInput" />
+      </view>
+      <view class="input-row">
+        <text class="input-label">性别</text>
+        <picker mode="selector" range="{{genderOptions}}" value="{{genderIndex}}" bindchange="onGenderChange">
+          <view class="picker-field">
+            <text>{{genderOptions[genderIndex]}}</text>
+            <text class="arrow">▼</text>
+          </view>
+        </picker>
+      </view>
+    </view>
+
+    <view class="btn-calculate" bindtap="calcCalorie">
+      <text class="btn-text">计算卡路里</text>
+    </view>
+
+    <view wx:if="{{calorieResult}}" class="card result-card">
+      <view class="calorie-result">
+        <view class="calorie-main">
+          <text class="calorie-value">{{calorieResult.bmr}}</text>
+          <text class="calorie-unit">千卡/天</text>
+        </view>
+        <text class="calorie-label">基础代谢率 (BMR)</text>
+      </view>
+
+      <view class="divider"></view>
+
+      <text class="section-title">每日所需热量（根据活动量）</text>
+      <view wx:for="{{calorieResult.dailyCalories}}" wx:key="name" class="activity-row">
+        <view class="activity-info">
+          <text class="activity-name">{{item.name}}</text>
+          <text class="activity-desc">{{item.desc}}</text>
+        </view>
+        <text class="activity-cal">{{item.calories}} 千卡</text>
+      </view>
+    </view>
+  </view>
+
+  <!-- 身高体重标准 -->
+  <view wx:if="{{activeTab === 2}}" class="tab-content">
+    <view class="card">
+      <view class="gender-selector">
+        <view
+          class="gender-btn {{gender === 'male' ? 'active' : ''}}"
+          bindtap="setGender"
+          data-gender="male"
+        >
+          <text>男性</text>
+        </view>
+        <view
+          class="gender-btn {{gender === 'female' ? 'active' : ''}}"
+          bindtap="setGender"
+          data-gender="female"
+        >
+          <text>女性</text>
+        </view>
+      </view>
+    </view>
+
+    <view class="card">
+      <text class="section-title">身高体重标准对照表</text>
+      <view class="std-table">
+        <view class="std-header">
+          <text class="std-col1">身高(cm)</text>
+          <text class="std-col2">标准体重(kg)</text>
+        </view>
+        <view wx:for="{{heightWeightTable}}" wx:key="height" class="std-row">
+          <text class="std-col1">{{item.height}}</text>
+          <text class="std-col2">{{item.minWeight}} - {{item.maxWeight}}</text>
+        </view>
+      </view>
+      <text class="table-note">* 数据仅供参考，实际体重因人而异</text>
+    </view>
+
+    <view class="card tip-card">
+      <text class="tip-title">健康小贴士</text>
+      <text class="tip-text">• 维持健康体重可以降低心血管疾病风险</text>
+      <text class="tip-text">• 结合BMI和腰围能更准确评估健康状况</text>
+      <text class="tip-text">• 适度运动有助于提高基础代谢率</text>
+      <text class="tip-text">• 均衡饮食比单纯节食更有效</text>
+    </view>
+  </view>
+
+  <!-- 自定义底部导航 -->
+  <view class="custom-tabbar">
+    <view class="tabbar-item" bindtap="goToIndex">
+      <view class="tabbar-icon">🏠</view>
+      <text class="tabbar-text">首页</text>
+    </view>
+    <view class="tabbar-item" bindtap="goToTax">
+      <view class="tabbar-icon">💰</view>
+      <text class="tabbar-text">个税</text>
+    </view>
+    <view class="tabbar-item" bindtap="goToLoan">
+      <view class="tabbar-icon">🏦</view>
+      <text class="tabbar-text">贷款</text>
+    </view>
+    <view class="tabbar-item active">
+      <view class="tabbar-icon">❤️</view>
+      <text class="tabbar-text">健康</text>
+    </view>
+  </view>
+</view>

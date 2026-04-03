@@ -1,0 +1,58 @@
+<view class="container">
+  <view class="card category-card">
+    <text class="section-title">单位换算</text>
+    <view class="category-grid">
+      <view
+        wx:for="{{categories}}"
+        wx:key="key"
+        class="category-item {{activeCategoryKey === item.key ? 'active' : ''}}"
+        bindtap="onCategoryChange"
+        data-key="{{item.key}}"
+      >
+        <text>{{item.name}}</text>
+      </view>
+
+      <view class="category-item reset-item" bindtap="resetConverter">
+        <text class="reset-icon">↻</text>
+        <text>重置</text>
+      </view>
+    </view>
+  </view>
+
+  <view class="card converter-card">
+    <text class="field-label">从 {{fromUnit.name}}</text>
+    <input
+      class="value-input"
+      type="text"
+      value="{{fromValue}}"
+      placeholder="请输入数值"
+      bindinput="onFromValueInput"
+    />
+
+    <picker mode="selector" range="{{unitOptions}}" value="{{fromUnitIndex}}" bindchange="onFromUnitChange">
+      <view class="picker-field">
+        <text>{{fromUnit ? fromUnit.symbol : '--'}}</text>
+        <text class="arrow">▼</text>
+      </view>
+    </picker>
+
+    <view class="swap-wrap" bindtap="swapUnits">
+      <text class="swap-icon">⇅</text>
+    </view>
+
+    <text class="field-label">到 {{toUnit.name}}</text>
+    <view class="value-output">{{toValue}}</view>
+
+    <picker mode="selector" range="{{unitOptions}}" value="{{toUnitIndex}}" bindchange="onToUnitChange">
+      <view class="picker-field">
+        <text>{{toUnit ? toUnit.symbol : '--'}}</text>
+        <text class="arrow">▼</text>
+      </view>
+    </picker>
+  </view>
+
+  <view class="card formula-card">
+    <text class="formula-title">换算公式</text>
+    <text class="formula-text">{{formulaText || '请输入数值后自动显示公式'}}</text>
+  </view>
+</view>

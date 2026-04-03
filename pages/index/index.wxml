@@ -1,0 +1,70 @@
+<view class="container">
+  <view class="header">
+    <text class="title">计算器大全</text>
+    <text class="subtitle">税务、贷款、健康、单位换算，一站式计算</text>
+  </view>
+
+  <view class="card" bindtap="goToTax">
+    <view class="card-icon tax-icon">
+      <text class="icon-text">税</text>
+    </view>
+    <view class="card-content">
+      <text class="card-title">个税计算</text>
+      <text class="card-desc">累计预扣法，真实税率计算</text>
+    </view>
+    <view class="arrow-icon">›</view>
+  </view>
+
+  <view class="card" bindtap="goToLoan">
+    <view class="card-icon loan-icon">
+      <text class="icon-text">贷</text>
+    </view>
+    <view class="card-content">
+      <text class="card-title">贷款计算</text>
+      <text class="card-desc">商贷、公积金、组合贷款</text>
+    </view>
+    <view class="arrow-icon">›</view>
+  </view>
+
+  <view class="card" bindtap="goToHealth">
+    <view class="card-icon health-icon">
+      <text class="icon-text">健</text>
+    </view>
+    <view class="card-content">
+      <text class="card-title">健康计算</text>
+      <text class="card-desc">BMI指数、卡路里、身高体重标准</text>
+    </view>
+    <view class="arrow-icon">›</view>
+  </view>
+
+  <view class="card" bindtap="goToConverter">
+    <view class="card-icon converter-icon">
+      <text class="icon-text">换</text>
+    </view>
+    <view class="card-content">
+      <text class="card-title">单位换算</text>
+      <text class="card-desc">长度、重量、温度、面积、体积等常用换算</text>
+    </view>
+    <view class="arrow-icon">›</view>
+  </view>
+
+  <!-- 自定义底部导航 -->
+  <view class="custom-tabbar">
+    <view class="tabbar-item active">
+      <view class="tabbar-icon">🏠</view>
+      <text class="tabbar-text">首页</text>
+    </view>
+    <view class="tabbar-item" bindtap="goToTax">
+      <view class="tabbar-icon">💰</view>
+      <text class="tabbar-text">个税</text>
+    </view>
+    <view class="tabbar-item" bindtap="goToLoan">
+      <view class="tabbar-icon">🏦</view>
+      <text class="tabbar-text">贷款</text>
+    </view>
+    <view class="tabbar-item" bindtap="goToHealth">
+      <view class="tabbar-icon">❤️</view>
+      <text class="tabbar-text">健康</text>
+    </view>
+  </view>
+</view>

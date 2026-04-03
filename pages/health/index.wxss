@@ -1,0 +1,388 @@
+.container {
+  padding: 24rpx;
+  padding-bottom: 140rpx;
+}
+
+.card {
+  background: #ffffff;
+  border-radius: 16rpx;
+  padding: 32rpx;
+  margin-bottom: 24rpx;
+  box-shadow: 0 2rpx 12rpx rgba(0, 0, 0, 0.05);
+}
+
+.section-title {
+  font-size: 32rpx;
+  font-weight: 600;
+  color: #323233;
+  margin-bottom: 24rpx;
+  display: block;
+}
+
+.input-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 24rpx 0;
+  border-bottom: 1rpx solid #ebedf0;
+}
+
+.input-row:last-child {
+  border-bottom: none;
+}
+
+.input-label {
+  font-size: 28rpx;
+  color: #323233;
+}
+
+.input-field {
+  text-align: right;
+  font-size: 28rpx;
+  color: #323233;
+  min-width: 200rpx;
+}
+
+.picker-field {
+  display: flex;
+  align-items: center;
+  background: #f7f8fa;
+  border-radius: 8rpx;
+  padding: 16rpx 24rpx;
+  min-width: 140rpx;
+  justify-content: space-between;
+}
+
+.arrow {
+  font-size: 20rpx;
+  color: #c8c9cc;
+  margin-left: 8rpx;
+}
+
+.btn-calculate {
+  background: linear-gradient(135deg, #ff6b6b 0%, #ff9f43 100%);
+  border-radius: 48rpx;
+  padding: 28rpx;
+  text-align: center;
+  margin: 32rpx 0;
+  box-shadow: 0 4rpx 16rpx rgba(255, 107, 107, 0.3);
+}
+
+.btn-text {
+  color: #ffffff;
+  font-size: 32rpx;
+  font-weight: 600;
+}
+
+/* Tab切换 */
+.tab-header {
+  display: flex;
+  background: #ffffff;
+  border-radius: 16rpx;
+  padding: 8rpx;
+  margin-bottom: 24rpx;
+  box-shadow: 0 2rpx 12rpx rgba(0, 0, 0, 0.05);
+}
+
+.tab-item {
+  flex: 1;
+  text-align: center;
+  padding: 20rpx 0;
+  font-size: 28rpx;
+  color: #969799;
+  border-radius: 12rpx;
+  transition: all 0.3s;
+}
+
+.tab-item.active {
+  background: linear-gradient(135deg, #ff6b6b 0%, #ff9f43 100%);
+  color: #ffffff;
+  font-weight: 600;
+}
+
+/* BMI结果 */
+.bmi-display {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 32rpx 0;
+}
+
+.bmi-circle {
+  width: 180rpx;
+  height: 180rpx;
+  border-radius: 50%;
+  border: 8rpx solid;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin-right: 40rpx;
+}
+
+.bmi-value {
+  font-size: 56rpx;
+  font-weight: 700;
+}
+
+.bmi-label {
+  font-size: 24rpx;
+  color: #969799;
+}
+
+.bmi-info {
+  flex: 1;
+}
+
+.bmi-category {
+  font-size: 40rpx;
+  font-weight: 700;
+  display: block;
+  margin-bottom: 8rpx;
+}
+
+.bmi-desc {
+  font-size: 26rpx;
+  color: #646566;
+  display: block;
+}
+
+/* BMI表格 */
+.bmi-table {
+  margin-top: 16rpx;
+}
+
+.bmi-table-header,
+.bmi-table-row {
+  display: flex;
+  padding: 16rpx 0;
+  border-bottom: 1rpx solid #ebedf0;
+}
+
+.bmi-table-header {
+  background: #f7f8fa;
+  border-radius: 8rpx;
+  font-weight: 600;
+}
+
+.col1 {
+  flex: 1;
+  text-align: center;
+}
+
+.col2 {
+  flex: 1;
+  text-align: center;
+}
+
+/* 卡路里结果 */
+.calorie-result {
+  text-align: center;
+  padding: 24rpx 0;
+}
+
+.calorie-main {
+  display: flex;
+  align-items: baseline;
+  justify-content: center;
+}
+
+.calorie-value {
+  font-size: 72rpx;
+  font-weight: 700;
+  color: #ff6b6b;
+}
+
+.calorie-unit {
+  font-size: 28rpx;
+  color: #969799;
+  margin-left: 12rpx;
+}
+
+.calorie-label {
+  font-size: 26rpx;
+  color: #646566;
+  margin-top: 8rpx;
+  display: block;
+}
+
+.activity-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20rpx 0;
+  border-bottom: 1rpx solid #ebedf0;
+}
+
+.activity-row:last-child {
+  border-bottom: none;
+}
+
+.activity-info {
+  flex: 1;
+}
+
+.activity-name {
+  font-size: 28rpx;
+  color: #323233;
+  font-weight: 500;
+  display: block;
+  margin-bottom: 4rpx;
+}
+
+.activity-desc {
+  font-size: 24rpx;
+  color: #969799;
+  display: block;
+}
+
+.activity-cal {
+  font-size: 32rpx;
+  font-weight: 600;
+  color: #ff6b6b;
+}
+
+/* 身高体重标准表 */
+.gender-selector {
+  display: flex;
+  gap: 16rpx;
+  margin-bottom: 24rpx;
+}
+
+.gender-btn {
+  flex: 1;
+  padding: 20rpx;
+  text-align: center;
+  background: #f7f8fa;
+  border-radius: 12rpx;
+  font-size: 28rpx;
+  color: #646566;
+}
+
+.gender-btn.active {
+  background: linear-gradient(135deg, #ff6b6b 0%, #ff9f43 100%);
+  color: #ffffff;
+  font-weight: 600;
+}
+
+.std-table {
+  margin-top: 16rpx;
+}
+
+.std-header,
+.std-row {
+  display: flex;
+  padding: 16rpx 0;
+  border-bottom: 1rpx solid #ebedf0;
+}
+
+.std-header {
+  background: #f7f8fa;
+  border-radius: 8rpx;
+  font-weight: 600;
+  color: #646566;
+}
+
+.std-col1 {
+  flex: 1;
+  text-align: center;
+}
+
+.std-col2 {
+  flex: 1;
+  text-align: center;
+}
+
+.table-note {
+  font-size: 24rpx;
+  color: #969799;
+  margin-top: 16rpx;
+  display: block;
+}
+
+.tip-card {
+  background: linear-gradient(135deg, #fff9f0 0%, #fff5f5 100%);
+}
+
+.tip-title {
+  font-size: 28rpx;
+  font-weight: 600;
+  color: #ff6b6b;
+  margin-bottom: 16rpx;
+  display: block;
+}
+
+.tip-text {
+  font-size: 26rpx;
+  color: #646566;
+  line-height: 1.8;
+  display: block;
+}
+
+/* 结果卡片 */
+.result-card {
+  background: linear-gradient(180deg, #fff5f5 0%, #ffffff 100rpx);
+}
+
+.result-row {
+  display: flex;
+  justify-content: space-between;
+  padding: 16rpx 0;
+}
+
+.result-label {
+  font-size: 28rpx;
+  color: #646566;
+}
+
+.result-value {
+  font-size: 28rpx;
+  color: #323233;
+  font-weight: 500;
+}
+
+.divider {
+  height: 1rpx;
+  background: #ebedf0;
+  margin: 24rpx 0;
+}
+
+/* 自定义底部导航 */
+.custom-tabbar {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  height: 110rpx;
+  background: #ffffff;
+  box-shadow: 0 -4rpx 20rpx rgba(0, 0, 0, 0.06);
+  padding-bottom: env(safe-area-inset-bottom);
+  z-index: 100;
+}
+
+.tabbar-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  flex: 1;
+  height: 100%;
+}
+
+.tabbar-icon {
+  font-size: 40rpx;
+  margin-bottom: 4rpx;
+}
+
+.tabbar-text {
+  font-size: 22rpx;
+  color: #969799;
+}
+
+.tabbar-item.active .tabbar-text {
+  color: #ff6b6b;
+  font-weight: 600;
+}

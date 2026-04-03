@@ -1,0 +1,305 @@
+.container {
+  padding: 24rpx;
+  padding-bottom: 140rpx;
+}
+
+.card {
+  background: #ffffff;
+  border-radius: 16rpx;
+  padding: 32rpx;
+  margin-bottom: 24rpx;
+  box-shadow: 0 2rpx 12rpx rgba(0, 0, 0, 0.05);
+}
+
+.section-title {
+  font-size: 32rpx;
+  font-weight: 600;
+  color: #323233;
+  margin-bottom: 24rpx;
+  display: block;
+}
+
+.type-selector {
+  display: flex;
+  gap: 16rpx;
+}
+
+.type-btn {
+  flex: 1;
+  padding: 20rpx;
+  border-radius: 12rpx;
+  background: #f7f8fa;
+  text-align: center;
+  transition: all 0.2s;
+}
+
+.type-btn.active {
+  background: linear-gradient(135deg, #ff6b6b 0%, #ff9f43 100%);
+}
+
+.type-text {
+  font-size: 28rpx;
+  color: #646566;
+}
+
+.type-btn.active .type-text {
+  color: #ffffff;
+  font-weight: 500;
+}
+
+.type-desc {
+  margin-top: 16rpx;
+  padding: 16rpx;
+  background: #f7f8fa;
+  border-radius: 8rpx;
+}
+
+.desc-text {
+  font-size: 24rpx;
+  color: #969799;
+}
+
+.input-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 24rpx 0;
+  border-bottom: 1rpx solid #ebedf0;
+}
+
+.input-row:last-child {
+  border-bottom: none;
+}
+
+.input-label {
+  font-size: 28rpx;
+  color: #323233;
+}
+
+.input-field {
+  text-align: right;
+  font-size: 28rpx;
+  color: #323233;
+  min-width: 200rpx;
+}
+
+.picker-field {
+  display: flex;
+  align-items: center;
+  background: #f7f8fa;
+  border-radius: 8rpx;
+  padding: 16rpx 24rpx;
+  min-width: 140rpx;
+  justify-content: space-between;
+}
+
+.arrow {
+  font-size: 20rpx;
+  color: #c8c9cc;
+  margin-left: 8rpx;
+}
+
+.rate-hint {
+  margin-top: 16rpx;
+  padding: 16rpx;
+  background: #f7f8fa;
+  border-radius: 8rpx;
+  font-size: 24rpx;
+  color: #969799;
+}
+
+.rate-text {
+  font-size: 28rpx;
+  color: #323233;
+  font-weight: 500;
+}
+
+.rate-text.highlight {
+  color: #1989fa;
+}
+
+.btn-calculate {
+  background: linear-gradient(135deg, #ff6b6b 0%, #ff9f43 100%);
+  border-radius: 48rpx;
+  padding: 28rpx;
+  text-align: center;
+  margin: 32rpx 0;
+  box-shadow: 0 4rpx 16rpx rgba(255, 107, 107, 0.3);
+}
+
+.btn-text {
+  color: #ffffff;
+  font-size: 32rpx;
+  font-weight: 600;
+}
+
+.result-card {
+  background: linear-gradient(180deg, #fff5f5 0%, #ffffff 100rpx);
+}
+
+.result-summary {
+  display: flex;
+  justify-content: space-between;
+  background: #ffffff;
+  border-radius: 16rpx;
+  padding: 32rpx;
+  margin-bottom: 24rpx;
+  box-shadow: 0 2rpx 12rpx rgba(0, 0, 0, 0.05);
+}
+
+.summary-item {
+  text-align: center;
+  flex: 1;
+}
+
+.summary-label {
+  font-size: 24rpx;
+  color: #969799;
+  display: block;
+  margin-bottom: 8rpx;
+}
+
+.summary-value {
+  font-size: 28rpx;
+  color: #323233;
+  font-weight: 600;
+  display: block;
+}
+
+.summary-value.primary {
+  font-size: 36rpx;
+  color: #ff6b6b;
+}
+
+.combo-detail {
+  background: #f7f8fa;
+  border-radius: 12rpx;
+  padding: 24rpx;
+  margin-bottom: 24rpx;
+}
+
+.combo-row {
+  display: flex;
+  justify-content: space-between;
+  padding: 8rpx 0;
+}
+
+.combo-label {
+  font-size: 26rpx;
+  color: #646566;
+}
+
+.combo-value {
+  font-size: 26rpx;
+  color: #323233;
+  font-weight: 500;
+}
+
+.divider {
+  height: 1rpx;
+  background: #ebedf0;
+  margin: 24rpx 0;
+}
+
+.detail-title {
+  font-size: 28rpx;
+  font-weight: 600;
+  color: #323233;
+  margin-bottom: 16rpx;
+  display: block;
+}
+
+.detail-row {
+  display: flex;
+  justify-content: space-between;
+  padding: 12rpx 0;
+}
+
+.detail-label {
+  font-size: 26rpx;
+  color: #646566;
+}
+
+.detail-value {
+  font-size: 26rpx;
+  color: #323233;
+  font-weight: 500;
+}
+
+.detail-table {
+  font-size: 22rpx;
+}
+
+.table-header {
+  display: flex;
+  padding: 16rpx 0;
+  background: #f7f8fa;
+  border-radius: 8rpx;
+  font-weight: 600;
+  color: #646566;
+}
+
+.table-row {
+  display: flex;
+  padding: 16rpx 0;
+  border-bottom: 1rpx solid #ebedf0;
+}
+
+.col1 {
+  flex: 0.8;
+  text-align: center;
+}
+
+.col2 {
+  flex: 1.2;
+  text-align: right;
+  padding-right: 8rpx;
+}
+
+.table-row .tax {
+  color: #ee0a24;
+}
+
+/* 自定义底部导航 */
+.custom-tabbar {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  height: 110rpx;
+  background: #ffffff;
+  box-shadow: 0 -4rpx 20rpx rgba(0, 0, 0, 0.06);
+  padding-bottom: env(safe-area-inset-bottom);
+  z-index: 100;
+}
+
+.tabbar-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  flex: 1;
+  height: 100%;
+}
+
+.tabbar-item.active .tabbar-text {
+  color: #ff6b6b;
+}
+
+.tabbar-icon {
+  font-size: 40rpx;
+  margin-bottom: 4rpx;
+}
+
+.tabbar-text {
+  font-size: 22rpx;
+  color: #969799;
+}
+
+.tabbar-item.active .tabbar-text {
+  color: #ff6b6b;
+  font-weight: 600;
+}

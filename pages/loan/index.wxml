@@ -1,0 +1,245 @@
+<view class="container">
+  <!-- 贷款类型选择 -->
+  <view class="card">
+    <text class="section-title">贷款类型</text>
+    <view class="type-selector">
+      <view
+        wx:for="{{loanTypes}}"
+        wx:key="*this"
+        class="type-btn {{loanTypeIndex === index ? 'active' : ''}}"
+        bindtap="setLoanType"
+        data-index="{{index}}"
+      >
+        <text class="type-text">{{item}}</text>
+      </view>
+    </view>
+  </view>
+
+  <!-- 还款方式 -->
+  <view class="card">
+    <text class="section-title">还款方式</text>
+    <view class="type-selector">
+      <view
+        wx:for="{{repaymentTypes}}"
+        wx:key="*this"
+        class="type-btn {{repaymentTypeIndex === index ? 'active' : ''}}"
+        bindtap="setRepaymentType"
+        data-index="{{index}}"
+      >
+        <text class="type-text">{{item}}</text>
+      </view>
+    </view>
+    <view class="type-desc">
+      <text class="desc-text">
+        {{repaymentTypeIndex === 0 ? '每月还款金额相同' : '每月还款本金相同'}}
+      </text>
+    </view>
+  </view>
+
+  <!-- LPR 参数 -->
+  <view wx:if="{{loanTypeIndex === 0 || loanTypeIndex === 2}}" class="card">
+    <text class="section-title">LPR 参数（商贷）</text>
+    <view class="input-row">
+      <text class="input-label">1年期 LPR</text>
+      <input
+        class="input-field small"
+        type="digit"
+        value="{{lprConfig.oneYear}}"
+        bindinput="onLprInput"
+        data-key="oneYear"
+      />
+      <text class="unit">%</text>
+    </view>
+    <view class="input-row">
+      <text class="input-label">5年期以上 LPR</text>
+      <input
+        class="input-field small"
+        type="digit"
+        value="{{lprConfig.fiveYear}}"
+        bindinput="onLprInput"
+        data-key="fiveYear"
+      />
+      <text class="unit">%</text>
+    </view>
+    <view class="rate-hint">
+      <text>最近更新：{{lprConfig.updatedAt}}（可手动改最新值）</text>
+    </view>
+  </view>
+
+  <!-- 商业贷款输入 -->
+  <view wx:if="{{loanTypeIndex === 0 || loanTypeIndex === 2}}" class="card">
+    <text class="section-title">商业贷款</text>
+    <view class="input-row">
+      <text class="input-label">贷款金额（万元）</text>
+      <input
+        class="input-field"
+        type="digit"
+        placeholder="请输入"
+        value="{{commercialAmount}}"
+        bindinput="onCommercialAmountInput"
+      />
+    </view>
+    <view class="input-row">
+      <text class="input-label">参考 LPR</text>
+      <text class="rate-text">{{commercialBaseLpr}}%</text>
+    </view>
+    <view class="input-row">
+      <text class="input-label">LPR 加点(BP)</text>
+      <input
+        class="input-field small"
+        type="number"
+        placeholder="例如 -45 / 0 / 20"
+        value="{{commercialBasisPoints}}"
+        bindinput="onCommercialBasisPointsInput"
+      />
+      <text class="unit">bp</text>
+    </view>
+    <view class="input-row">
+      <text class="input-label">执行年利率</text>
+      <text class="rate-text highlight">{{commercialRate}}%</text>
+    </view>
+    <view class="input-row">
+      <text class="input-label">贷款年限</text>
+      <picker mode="selector" range="{{yearsList}}" value="{{commercialYearsIndex}}" bindchange="onCommercialYearsChange">
+        <view class="picker-field">
+          <text>{{commercialYears}}年</text>
+          <text class="arrow">▼</text>
+        </view>
+      </picker>
+    </view>
+  </view>
+
+  <!-- 公积金贷款输入 -->
+  <view wx:if="{{loanTypeIndex === 1 || loanTypeIndex === 2}}" class="card">
+    <text class="section-title">公积金贷款</text>
+    <view class="input-row">
+      <text class="input-label">贷款金额（万元）</text>
+      <input
+        class="input-field"
+        type="digit"
+        placeholder="请输入"
+        value="{{gjjAmount}}"
+        bindinput="onGjjAmountInput"
+      />
+    </view>
+    <view class="input-row">
+      <text class="input-label">年利率</text>
+      <input
+        class="input-field small"
+        type="digit"
+        placeholder="2.6"
+        value="{{gjjRate}}"
+        bindinput="onGjjRateInput"
+      />
+      <text class="unit">%</text>
+    </view>
+    <view class="input-row">
+      <text class="input-label">贷款年限</text>
+      <picker mode="selector" range="{{yearsList}}" value="{{gjjYearsIndex}}" bindchange="onGjjYearsChange">
+        <view class="picker-field">
+          <text>{{gjjYears}}年</text>
+          <text class="arrow">▼</text>
+        </view>
+      </picker>
+    </view>
+    <view class="rate-hint">
+      <text>首套公积金参考：5年以下 2.10%，5年以上 2.60%</text>
+    </view>
+  </view>
+
+  <!-- 计算按钮 -->
+  <view class="btn-calculate" bindtap="calculate">
+    <text class="btn-text">开始计算</text>
+  </view>
+
+  <!-- 结果区域 -->
+  <view wx:if="{{result}}" class="card result-card">
+    <text class="section-title">计算结果</text>
+
+    <view class="result-summary">
+      <view class="summary-item">
+        <text class="summary-label">月供</text>
+        <text class="summary-value primary">¥{{result.monthlyPayment}}</text>
+      </view>
+      <view class="summary-item">
+        <text class="summary-label">利息总额</text>
+        <text class="summary-value">{{result.totalInterest}}</text>
+      </view>
+      <view class="summary-item">
+        <text class="summary-label">还款总额</text>
+        <text class="summary-value">{{result.totalPayment}}</text>
+      </view>
+    </view>
+
+    <view wx:if="{{loanTypeIndex === 2}}" class="combo-detail">
+      <view class="combo-row">
+        <text class="combo-label">商贷金额</text>
+        <text class="combo-value">¥{{result.commercialPrincipal}}万</text>
+      </view>
+      <view class="combo-row">
+        <text class="combo-label">公积金金额</text>
+        <text class="combo-value">¥{{result.gjjPrincipal}}万</text>
+      </view>
+    </view>
+
+    <view class="divider"></view>
+
+    <text class="detail-title">首月还款明细</text>
+    <view class="detail-row">
+      <text class="detail-label">月供</text>
+      <text class="detail-value">¥{{result.firstMonth.payment}}</text>
+    </view>
+    <view class="detail-row">
+      <text class="detail-label">本金</text>
+      <text class="detail-value">¥{{result.firstMonth.principal}}</text>
+    </view>
+    <view class="detail-row">
+      <text class="detail-label">利息</text>
+      <text class="detail-value tax">¥{{result.firstMonth.interest}}</text>
+    </view>
+    <view class="detail-row">
+      <text class="detail-label">剩余本金</text>
+      <text class="detail-value">¥{{result.firstMonth.balance}}</text>
+    </view>
+
+    <view class="divider"></view>
+    <text class="detail-title">还款计划（前12期）</text>
+
+    <view class="detail-table">
+      <view class="table-header">
+        <text class="col1">期数</text>
+        <text class="col2">月供</text>
+        <text class="col2">本金</text>
+        <text class="col2">利息</text>
+        <text class="col2">余额</text>
+      </view>
+      <view wx:for="{{result.details}}" wx:key="month" wx:if="{{index < 12}}" class="table-row">
+        <text class="col1">{{item.month}}</text>
+        <text class="col2">{{item.payment}}</text>
+        <text class="col2">{{item.principal}}</text>
+        <text class="col2 tax">{{item.interest}}</text>
+        <text class="col2">{{item.balance}}</text>
+      </view>
+    </view>
+  </view>
+
+  <!-- 自定义底部导航 -->
+  <view class="custom-tabbar">
+    <view class="tabbar-item" bindtap="goToIndex">
+      <view class="tabbar-icon">🏠</view>
+      <text class="tabbar-text">首页</text>
+    </view>
+    <view class="tabbar-item" bindtap="goToTax">
+      <view class="tabbar-icon">💰</view>
+      <text class="tabbar-text">个税</text>
+    </view>
+    <view class="tabbar-item active">
+      <view class="tabbar-icon">🏦</view>
+      <text class="tabbar-text">贷款</text>
+    </view>
+    <view class="tabbar-item" bindtap="goToHealth">
+      <view class="tabbar-icon">❤️</view>
+      <text class="tabbar-text">健康</text>
+    </view>
+  </view>
+</view>

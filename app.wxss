@@ -1,0 +1,80 @@
+page {
+  background-color: #f7f8fa;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+}
+
+.container {
+  padding: 24rpx;
+}
+
+.card {
+  background: #ffffff;
+  border-radius: 16rpx;
+  padding: 32rpx;
+  margin-bottom: 24rpx;
+  box-shadow: 0 2rpx 12rpx rgba(0, 0, 0, 0.05);
+}
+
+.section-title {
+  font-size: 32rpx;
+  font-weight: 600;
+  color: #323233;
+  margin-bottom: 24rpx;
+}
+
+.result-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20rpx 0;
+  border-bottom: 1rpx solid #ebedf0;
+}
+
+.result-item:last-child {
+  border-bottom: none;
+}
+
+.result-label {
+  font-size: 28rpx;
+  color: #646566;
+}
+
+.result-value {
+  font-size: 28rpx;
+  color: #323233;
+  font-weight: 500;
+}
+
+.result-highlight {
+  color: #ee0a24;
+  font-weight: 600;
+}
+
+.result-success {
+  color: #ff6b6b;
+  font-weight: 600;
+}
+
+.btn-calculate {
+  background: linear-gradient(135deg, #ff6b6b 0%, #ff9f43 100%);
+  border-radius: 48rpx;
+  padding: 28rpx;
+  text-align: center;
+  margin: 32rpx 0;
+  box-shadow: 0 4rpx 16rpx rgba(255, 107, 107, 0.3);
+}
+
+.btn-text {
+  color: #ffffff;
+  font-size: 32rpx;
+  font-weight: 600;
+}
+
+.tab-bar {
+  background: #ffffff;
+  border-top: none;
+}
+
+checkbox .wx-checkbox-input {
+  background: linear-gradient(135deg, #ff6b6b 0%, #ff9f43 100%);
+}
