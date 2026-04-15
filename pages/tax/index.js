@@ -1,4 +1,9 @@
 const { getCityList, getCityConfig } = require('../../utils/tax');
+const {
+  enablePageShare,
+  buildShareAppMessage,
+  buildShareTimeline
+} = require('../../utils/share');
 
 Page({
   data: {
@@ -35,6 +40,7 @@ Page({
    * 页面加载时初始化当前城市配置。
    */
   onLoad() {
+    enablePageShare();
     this.applyCityConfig(this.data.cityIndex);
   },
 
@@ -333,5 +339,13 @@ Page({
         this.showCloudError(error);
       }
     });
+  },
+
+  onShareAppMessage() {
+    return buildShareAppMessage('pages/tax/index');
+  },
+
+  onShareTimeline() {
+    return buildShareTimeline('pages/tax/index');
   }
 });

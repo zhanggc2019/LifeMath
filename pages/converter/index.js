@@ -6,6 +6,11 @@ const {
   formatUnitValue,
   buildFormulaText
 } = require('../../utils/converter');
+const {
+  enablePageShare,
+  buildShareAppMessage,
+  buildShareTimeline
+} = require('../../utils/share');
 
 Page({
   data: {
@@ -26,6 +31,7 @@ Page({
    * 页面加载时初始化默认分类。
    */
   onLoad() {
+    enablePageShare();
     this.initCategory('length');
   },
 
@@ -160,5 +166,13 @@ Page({
    */
   resetConverter() {
     this.initCategory(this.data.activeCategoryKey);
+  },
+
+  onShareAppMessage() {
+    return buildShareAppMessage('pages/converter/index');
+  },
+
+  onShareTimeline() {
+    return buildShareTimeline('pages/converter/index');
   }
 });

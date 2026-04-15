@@ -1,4 +1,14 @@
+const {
+  enablePageShare,
+  buildShareAppMessage,
+  buildShareTimeline
+} = require('../../utils/share');
+
 Page({
+  onLoad() {
+    enablePageShare();
+  },
+
   /**
    * 跳转到个税计算页面。
    */
@@ -25,5 +35,13 @@ Page({
    */
   goToConverter() {
     wx.redirectTo({ url: '/pages/converter/index' });
+  },
+
+  onShareAppMessage() {
+    return buildShareAppMessage('pages/index/index');
+  },
+
+  onShareTimeline() {
+    return buildShareTimeline('pages/index/index');
   }
 });

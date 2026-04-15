@@ -1,4 +1,9 @@
 const { calcBMI, calcBMR, getHeightWeightTable } = require('../../utils/health');
+const {
+  enablePageShare,
+  buildShareAppMessage,
+  buildShareTimeline
+} = require('../../utils/share');
 
 Page({
   data: {
@@ -25,6 +30,7 @@ Page({
   },
 
   onLoad() {
+    enablePageShare();
     this.setData({
       heightWeightTable: getHeightWeightTable('male')
     });
@@ -99,5 +105,13 @@ Page({
 
   goToLoan() {
     wx.redirectTo({ url: '/pages/loan/index' });
+  },
+
+  onShareAppMessage() {
+    return buildShareAppMessage('pages/health/index');
+  },
+
+  onShareTimeline() {
+    return buildShareTimeline('pages/health/index');
   }
 });

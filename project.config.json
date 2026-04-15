@@ -48,7 +48,7 @@
     "lazyCodeLoading": "requiredComponents"
   },
   "compileType": "miniprogram",
-  "libVersion": "2.25.0",
+  "libVersion": "3.15.1",
   "appid": "wx8347524de4920a03",
   "projectname": "wechat-demo",
   "condition": {},

@@ -1,3 +1,9 @@
+const {
+  enablePageShare,
+  buildShareAppMessage,
+  buildShareTimeline
+} = require('../../utils/share');
+
 Page({
   data: {
     loanTypes: ['商业贷款', '公积金贷款', '组合贷款'],
@@ -32,6 +38,7 @@ Page({
    * 页面初始化时同步 LPR 与公积金默认利率。
    */
   onLoad() {
+    enablePageShare();
     this.syncCommercialRateByLpr();
     this.syncGjjRateByYears(this.data.gjjYears);
   },
@@ -303,5 +310,13 @@ Page({
     } finally {
       wx.hideLoading();
     }
+  },
+
+  onShareAppMessage() {
+    return buildShareAppMessage('pages/loan/index');
+  },
+
+  onShareTimeline() {
+    return buildShareTimeline('pages/loan/index');
   }
 });
